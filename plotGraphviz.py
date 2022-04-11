@@ -2,7 +2,6 @@ import IPython.display
 import pydotplus as pydot
 import os
 import csv
-# from IPython.display import Image, display
 
 # How To Plot Unix Directory Structure Using Python Graphviz
 # https://www.nbshare.io/notebook/745848606/How-To-Plot-Unix-Directory-Structure-Using-Python-Graphviz/
@@ -10,10 +9,9 @@ from IPython.core.display import Image
 from IPython.core.display_functions import display
 
 
-def plot_example():
-    # rootdir = "E:\\prog\\python\\plot-tree-data\\share\\man"
-    # rootdir = "/Users/daniel.alonso/ecedago/scripts/gitlab/plot-tree-data/env/lib/python3.9/site-packages/jedi"
-    rootdir = "/Users/daniel.alonso/ecedago/scripts/batch-decrypter"
+def plot_dirs_example():
+    rootdir = "E:\\prog\\python\\plot-tree-data\\share\\man"
+    # rootdir = "/Users/daniel.alonso/ecedago/scripts/batch-decrypter"
 
     G = pydot.Dot(graph_type="digraph")
     node = pydot.Node(rootdir, label=rootdir.split("/")[-1], style="filled", fillcolor="green")
@@ -109,23 +107,25 @@ def create_base_graph():
 
     return G
 
+# Directory plot
+plot_dirs_example()
 
-plot_example()
-
+# Tree handmade built
 G = create_base_graph()
 G.write("output_root.svg", format='svg')
 G.write("output_root.png", format='png')
 
-# csvDatafile = "E:\prog\python\plot-tree-data\gitlab_scripts\gitlab_eurobits_groups.csv"
-csvDatafile = "/Users/daniel.alonso/ecedago/scripts/gitlab/gitlab_eurobits_groups.csv"
+# Tree plot from csvs with data from gitlab projects and groups
+csvDatafile = "E:\prog\python\plot-tree-data\gitlab_scripts\gitlab_eurobits_groups.csv"
+# csvDatafile = "/Users/daniel.alonso/ecedago/scripts/gitlab/gitlab_eurobits_groups.csv"
 G = pydot.Dot(graph_type="digraph")
 G.add_node(pydot.Node("eurobits", label="eurobits", style="filled", fillcolor="cyan"))
 read_csv(G, csvDatafile)
 G.write("output_group.svg", format='svg')
 G.write("output_group.png", format='png')
 
-## csvDatafile = "E:\prog\python\plot-tree-data\gitlab_scripts\gitlab_eurobits_groups_projects.csv"
-csvDatafile = "/Users/daniel.alonso/ecedago/scripts/gitlab/gitlab_eurobits_groups_projects.csv"
+csvDatafile = "E:\prog\python\plot-tree-data\gitlab_scripts\gitlab_eurobits_groups_projects.csv"
+# csvDatafile = "/Users/daniel.alonso/ecedago/scripts/gitlab/gitlab_eurobits_groups_projects.csv"
 G = pydot.Dot(graph_type="digraph")
 G.add_node(pydot.Node("eurobits", label="eurobits", style="filled", fillcolor="cyan"))
 read_csv(G, csvDatafile)
